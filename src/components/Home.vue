@@ -9,7 +9,7 @@
             <!-- Bind results using a ':' -->
             <!-- Use a v-if/else if their is a featured_image -->
             <img class="featured-image" v-if="post.featured_image" :src="post.featured_image" alt="">
-            <img class="featured-image" v-else src="http://via.placeholder.com/250x250" alt="">
+            <img class="featured-image" v-else :src="'https://i.picsum.photos/id/' + getRand(Date.parse(post.published)) + '/250/250.jpg'" alt="">
           </figure>
           <div class="article-text">
             <h2>{{ post.title }}</h2>
@@ -54,6 +54,7 @@
 
 <script>
   import { butter } from '@/buttercms'
+  import { Random } from '@/random'
   export default {
     name: 'home',
     data() {
@@ -71,6 +72,10 @@
           // console.log(res.data)
           this.posts = res.data.data
         })
+      },
+      getRand(seed) {
+        let rand = new Random(seed);
+        return rand.nextInt(0, 999);
       }
     },
     created() {
