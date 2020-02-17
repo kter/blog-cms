@@ -14,32 +14,32 @@
 </template>
 
 <script>
-  import { butter } from '@/buttercms'
-  export default {
-    name: 'post',
-    data() {
-      return {
-        post: {}
-      }
-    },
-    methods: {
-      getPost() {
-        butter.post.retrieve(this.$route.params.slug)
-          .then((res) => {
-            // console.log(res.data)
-            this.post = res.data
-          }).catch((res) => {
+import { butter } from '@/buttercms'
+export default {
+  name: 'post',
+  data () {
+    return {
+      post: {}
+    }
+  },
+  methods: {
+    getPost () {
+      butter.post.retrieve(this.$route.params.slug)
+        .then((res) => {
+          // console.log(res.data)
+          this.post = res.data
+        }).catch((res) => {
           console.log(res)
         })
-      }
-    },
-    created() {
+    }
+  },
+  created () {
+    this.getPost()
+  },
+  watch: {
+    $route (to, from) {
       this.getPost()
-    },
-    watch: {
-      $route(to, from) {
-        this.getPost()
-      }
     }
   }
+}
 </script>

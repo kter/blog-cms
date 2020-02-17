@@ -17,6 +17,6 @@ export default new Router({
       path: '/:slug',
       name: 'post',
       component: Post
-    },
+    }
   ]
 })

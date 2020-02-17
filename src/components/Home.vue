@@ -53,33 +53,33 @@
 </style>
 
 <script>
-  import { butter } from '@/buttercms'
-  import { Random } from '@/random'
-  export default {
-    name: 'home',
-    data() {
-      return {
-        page_title: 'Blog',
-        posts: []
-      }
-    },
-    methods: {
-      getPosts() {
-        butter.post.list({
-          page: 1,
-          page_size: 10
-        }).then((res) => {
-          // console.log(res.data)
-          this.posts = res.data.data
-        })
-      },
-      getRand(seed) {
-        let rand = new Random(seed);
-        return rand.nextInt(0, 999);
-      }
-    },
-    created() {
-      this.getPosts()
+import { butter } from '@/buttercms'
+import { Random } from '@/random'
+export default {
+  name: 'home',
+  data () {
+    return {
+      page_title: 'Blog',
+      posts: []
     }
+  },
+  methods: {
+    getPosts () {
+      butter.post.list({
+        page: 1,
+        page_size: 10
+      }).then((res) => {
+        // console.log(res.data)
+        this.posts = res.data.data
+      })
+    },
+    getRand (seed) {
+      let rand = new Random(seed)
+      return rand.nextInt(0, 999)
+    }
+  },
+  created () {
+    this.getPosts()
   }
+}
 </script>
