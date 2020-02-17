@@ -2,22 +2,55 @@
   <div id="home">
     <h1>{{ page_title }}</h1>
     <!-- Create v-for and apply a key for Vue. Example is using a combination of the slug and index -->
-    <div v-for="(post,index) in posts" :key="post.slug + '_' + index">
+    <div class="article-wrapper" v-for="(post,index) in posts" :key="post.slug + '_' + index">
       <router-link :to="'/' + post.slug">
-        <article class="media">
-          <figure>
+        <article class="media article">
+          <figure class="article-image">
             <!-- Bind results using a ':' -->
             <!-- Use a v-if/else if their is a featured_image -->
-            <img v-if="post.featured_image" :src="post.featured_image" alt="">
-            <img v-else src="http://via.placeholder.com/250x250" alt="">
+            <img class="featured-image" v-if="post.featured_image" :src="post.featured_image" alt="">
+            <img class="featured-image" v-else src="http://via.placeholder.com/250x250" alt="">
           </figure>
-          <h2>{{ post.title }}</h2>
-          <p>{{ post.summary }}</p>
+          <div class="article-text">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.summary }}</p>
+          </div>
         </article>
       </router-link>
     </div>
   </div>
 </template>
+
+<style>
+  #home {
+    margin: 50px;
+    text-align: initial;
+  }
+  .article-wrapper {
+    margin: 25px;
+  }
+  .article {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .article-image {
+    display: table-cell;
+    width: 250px;
+    padding-right: 25px;
+  }
+
+  .article-text {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .featured-image {
+    width: 250px;
+  }
+
+</style>
 
 <script>
   import { butter } from '@/buttercms'
