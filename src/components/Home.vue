@@ -13,7 +13,7 @@
           </figure>
           <div class="article-text">
             <h2>{{ post.title }}</h2>
-            <p>{{ post.summary }}</p>
+            <p>{{ post.short_summary }}</p>
           </div>
         </article>
       </router-link>
@@ -55,6 +55,10 @@
 <script>
 import { butter } from '@/buttercms'
 import { Random } from '@/random'
+
+const striptags = require('striptags')
+const SUMMARY_LIMIT = 90
+
 export default {
   name: 'home',
   data () {
@@ -70,12 +74,19 @@ export default {
         page_size: 10
       }).then((res) => {
         // console.log(res.data)
+        const rowSize = res.data.data.length
+        for (let i = 0; i < rowSize; i++) {
+          res.data.data[i].short_summary = this.shortSummary(res.data.data[i].summary)
+        }
         this.posts = res.data.data
       })
     },
     getRand (seed) {
       let rand = new Random(seed)
       return rand.nextInt(0, 999)
+    },
+    shortSummary (summary) {
+      return striptags(summary).slice(0, SUMMARY_LIMIT) + '...'
     }
   },
   created () {
