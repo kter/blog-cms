@@ -1,6 +1,10 @@
 <template>
   <div id="post">
     <h1>{{ post.data.title }}</h1>
+    <div id="post-info">
+      Published at: {{ post.data.published }}
+    </div>
+    <hr>
     <div v-html="post.data.body"></div>
     <hr>
 
