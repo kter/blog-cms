@@ -9,7 +9,7 @@
             <!-- Bind results using a ':' -->
             <!-- Use a v-if/else if their is a featured_image -->
             <img class="featured-image" v-if="post.featured_image" :src="post.featured_image" alt="">
-            <img class="featured-image" v-else :src="'https://picsum.photos/seed/' + getRand(Date.parse(post.published)) + '/250/250.jpg'" alt="">
+            <img class="featured-image" v-else :src="'https://picsum.photos/seed/' + Date.parse(post.published) + '/250/250.jpg'" alt="">
           </figure>
           <div class="article-text">
             <h2>{{ post.title }}</h2>
@@ -80,10 +80,6 @@ export default {
         }
         this.posts = res.data.data
       })
-    },
-    getRand (seed) {
-      let rand = new Random(seed)
-      return rand.nextInt(0, 999)
     },
     shortSummary (summary) {
       return striptags(summary).slice(0, SUMMARY_LIMIT) + '...'
