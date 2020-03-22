@@ -54,7 +54,6 @@
 
 <script>
 import { butter } from '@/buttercms'
-import { Random } from '@/random'
 
 const striptags = require('striptags')
 const SUMMARY_LIMIT = 90
